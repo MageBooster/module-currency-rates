@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="currency">
+            <group id="magebooster_tcmb" translate="label comment" sortOrder="45" showInDefault="1">
+                <label>TCMB Rates (MageBooster)</label>
+                <comment><![CDATA[Daily rates of the Central Bank of the Republic of Türkiye. Choose "TCMB" as the service in Scheduled Import Settings or in Stores > Currency Rates > Import. Needs a serial number (Stores > Configuration > MageBooster > Licenses).]]></comment>
+                <field id="rate_type" translate="label comment" type="select" sortOrder="10" showInDefault="1">
+                    <label>Rate</label>
+                    <source_model>MageBooster\CurrencyRates\Model\Config\Source\RateType</source_model>
+                    <comment>Banknote rates are missing for some currencies; the forex rate is used then.</comment>
+                </field>
+                <field id="markup" translate="label comment" type="text" sortOrder="20" showInDefault="1">
+                    <label>Price markup (%)</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <comment>Added to every imported rate from the base currency, so converted prices are this much higher. 0 = no markup.</comment>
+                </field>
+                <field id="url" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Feed URL</label>
+                </field>
+                <field id="timeout" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label>Connection timeout (seconds)</label>
+                    <validate>validate-digits</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Directory\Model\Currency\Import\Config">
+        <arguments>
+            <argument name="servicesConfig" xsi:type="array">
+                <item name="magebooster_tcmb" xsi:type="array">
+                    <item name="label" xsi:type="string">TCMB (Central Bank of the Republic of Türkiye) · MageBooster</item>
+                    <item name="class" xsi:type="string">MageBooster\CurrencyRates\Model\Import\Tcmb</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageBooster\License\Model\Products">
+        <arguments>
+            <argument name="products" xsi:type="array">
+                <item name="currency-rates" xsi:type="string">Currency Rates (TCMB)</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="MageBoosterTcmbLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">magebooster_tcmb</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="file" xsi:type="object">MageBoosterTcmbLogHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageBoosterTcmbLogHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/magebooster_tcmb.log</argument>
+        </arguments>
+    </virtualType>
+    <type name="MageBooster\CurrencyRates\Model\Import\Tcmb">
+        <arguments>
+            <argument name="logger" xsi:type="object">MageBoosterTcmbLogger</argument>
+        </arguments>
+    </type>
+</config>
