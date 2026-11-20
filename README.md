@@ -1,7 +1,7 @@
 # MageBooster_CurrencyRates – TCMB exchange rates for Magento 2
 
 Daily Central Bank of the Republic of Türkiye (TCMB) rates as a Magento currency import service, for Magento 2.4.9 /
-Mage-OS (PHP 8.0+ – 8.5). Code is MIT; using it needs a **MageBooster serial number**. Türkçe açıklama aşağıda.
+Mage-OS (PHP 8.0+ – 8.5). Commercial licence (see LICENSE.txt): using it needs a **MageBooster serial number** per production domain. Türkçe açıklama aşağıda.
 
 ## Install
 
