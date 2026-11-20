@@ -2,7 +2,28 @@
     "name": "magebooster/module-currency-rates",
     "description": "Central Bank of the Republic of Türkiye (TCMB) currency rates import for Magento 2, with optional price markup. Needs a MageBooster serial number.",
     "type": "magento2-module",
+    "keywords": [
+        "magento2",
+        "magento-2-module",
+        "hyva",
+        "luma",
+        "currency",
+        "exchange-rates",
+        "tcmb",
+        "turkish-lira"
+    ],
+    "homepage": "https://magebooster.com",
     "license": "proprietary",
+    "authors": [
+        {
+            "name": "WebWorks 101 OÜ",
+            "homepage": "https://magebooster.com"
+        }
+    ],
+    "support": {
+        "email": "info@magebooster.com",
+        "docs": "https://github.com/MageBooster/module-currency-rates/blob/main/docs/HOWTO.en.md"
+    },
     "require": {
         "php": ">=8.0",
         "ext-simplexml": "*",
