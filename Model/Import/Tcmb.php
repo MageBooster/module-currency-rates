@@ -26,11 +26,11 @@ class Tcmb extends AbstractImport
 
     public function __construct(
         CurrencyFactory $currencyFactory,
-        private readonly TcmbFeed $feed,
-        private readonly LicenseInterface $license,
-        private readonly ScopeConfigInterface $scopeConfig,
-        private readonly FlagManager $flagManager,
-        private readonly LoggerInterface $logger
+        private TcmbFeed $feed,
+        private LicenseInterface $license,
+        private ScopeConfigInterface $scopeConfig,
+        private FlagManager $flagManager,
+        private LoggerInterface $logger
     ) {
         parent::__construct($currencyFactory);
     }

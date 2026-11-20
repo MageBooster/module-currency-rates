@@ -12,8 +12,8 @@ use Magento\Framework\HTTP\Client\CurlFactory;
 class TcmbFeed
 {
     public function __construct(
-        private readonly CurlFactory $curlFactory,
-        private readonly ScopeConfigInterface $scopeConfig
+        private CurlFactory $curlFactory,
+        private ScopeConfigInterface $scopeConfig
     ) {
     }
 

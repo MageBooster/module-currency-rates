@@ -12,7 +12,7 @@ use Magento\Framework\Notification\MessageInterface;
  */
 class FeedMessage implements MessageInterface
 {
-    public function __construct(private readonly FlagManager $flagManager)
+    public function __construct(private FlagManager $flagManager)
     {
     }
 
