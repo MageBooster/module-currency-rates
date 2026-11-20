@@ -18,7 +18,7 @@ class FeedMessage implements MessageInterface
 
     public function getIdentity()
     {
-        return 'magebooster_tcmb_feed_' . md5((string)json_encode($this->flagManager->getFlagData(Tcmb::FLAG_ERROR)));
+        return 'magebooster_tcmb_feed_' . hash('sha256', (string)json_encode($this->flagManager->getFlagData(Tcmb::FLAG_ERROR)));
     }
 
     public function isDisplayed()
@@ -31,8 +31,8 @@ class FeedMessage implements MessageInterface
         $data = (array)$this->flagManager->getFlagData(Tcmb::FLAG_ERROR);
         return (string)__(
             'The last TCMB currency rate import failed (%1, %2). The previous rates are still in use.',
-            htmlspecialchars((string)($data['time'] ?? '')),
-            htmlspecialchars((string)($data['error'] ?? ''))
+            htmlspecialchars((string)($data['time'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE),
+            htmlspecialchars((string)($data['error'] ?? ''), ENT_QUOTES | ENT_SUBSTITUTE)
         );
     }
 
