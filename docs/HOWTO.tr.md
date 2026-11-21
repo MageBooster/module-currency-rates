@@ -13,7 +13,7 @@ Modül, Magento'ya **TCMB (Central Bank of the Republic of Türkiye) · MageBoos
 - **Birim:** TCMB dosyasındaki "Unit" alanı dikkate alınır. Örneğin JPY 100 birim üzerinden verilir.
 - **Çapraz kurlar:** İki para biriminden hiçbiri TRY değilse kur TRY üzerinden hesaplanır.
 - **Dosyaya ulaşılamazsa:** Son kaydedilen kurlar kullanılmaya devam eder ve yönetim panelinde uyarı çıkar.
-- **Seri numarası yoksa:** Geçerli bir seri numarası yokken modül kur aktarmaz. Mevcut kurlara dokunmaz ve "seri numaranızı girin" uyarısı gösterir.
+- **Seri numarası yoksa:** Geçerli bir seri numarası yoksa modül 30 gün kur aktarmaya devam eder (ek süre, aşağıdaki Lisans kontrolü bölümüne bakın). Sonra kur aktarmaz; mevcut kurlara dokunmaz ve aktarma sırasında "lisans gerekir" mesajı gösterir.
 - **Kayıtlar:** Tüm işlemler `var/log/magebooster_tcmb.log` dosyasına yazılır.
 
 ## Gereksinimler
@@ -120,7 +120,7 @@ Ayarlar **Stores > Configuration > General > Currency Setup** sayfasında, **TCM
 
 ## Sorun giderme
 
-- **"TCMB rates: enter your serial number in Stores > Configuration > MageBooster > Licenses."**
+- **"TCMB kurları için MageBooster lisansı gerekir..."** (İngilizce panelde: "TCMB rates need a MageBooster license...")
   - Lisanslar sayfasına geçerli bir seri numarası girin.
   - Seri numarasının tüm mağaza alan adlarını kapsadığını kontrol edin.
 - **"TCMB rates could not be loaded (...). The last saved rates stay in use."** TCMB dosyasına ulaşılamadı ya da istek zaman aşımına uğradı.
@@ -143,6 +143,18 @@ Ayarlar **Stores > Configuration > General > Currency Setup** sayfasında, **TCM
    ```
 
 Aktarılmış kurlar Magento'nun `directory_currency_rate` tablosunda kalır.
+
+## Lisans kontrolü (seri numarası)
+
+- Seri numarasını **Stores > Configuration > MageBooster > Licenses** sayfasındaki **Currency Rates (TCMB)** alanına girin (Hyvä sürümü: **Currency Rates (TCMB) (Hyvä edition)**). Seri numarası `MB1` ile başlar.
+- Aynı sayfadaki **License status** tablosu her modülün durumunu gösterir: **Etkin**, **Ek süre** veya **Kapalı**. `bin/magento magebooster:license:status` komutu da aynı bilgiyi verir.
+- Geçerli bir seri numarası yoksa (hiç girilmemiş, geçersiz, süresi dolmuş, başka bir alan adı ya da başka bir ürün için) modül **30 gün** çalışmaya devam eder.
+  - 30 gün, mağaza modülü geçerli seri numarası olmadan ilk gördüğü anda başlar.
+  - Geçerli bir seri numarası girilince ek süre biter. Bu seri numarası sonradan geçersiz olursa (örneğin süresi dolarsa) yeni bir 30 günlük süre başlar.
+- Ek süre boyunca ve sonrasında her yönetim paneli sayfasında kapatılamayan bir bildirim görünür. Bildirimde modülün adı, nedeni, kalan gün sayısı ya da kapandığı tarih yazar. Lisanslar sayfasına ve https://store.magebooster.com/licences/account/ adresindeki seri numaralarınıza bağlantı verir.
+- Müşteriler mağazada hiçbir lisans mesajı görmez. Kontrol mağazanın içinde yapılır, MageBooster'a hiçbir bilgi gönderilmez.
+- Geliştirme adresleri (`localhost`, `127.0.0.1`, `*.localhost`, `*.test`, `*.local`) alan adı kontrolüne takılmaz.
+- **30 gün dolunca:** TCMB kurları artık aktarılmaz; ne zamanlanmış güncelleme ne de Stores > Currency Rates sayfasındaki **Import** düğmesi çalışır. Son kaydedilen kurlar kullanılmaya devam eder.
 
 ## Lisans ve kopyalama
 

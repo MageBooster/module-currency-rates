@@ -13,7 +13,7 @@ This module adds a currency rate import service to Magento. The service is calle
 - The TCMB "Unit" field is respected. For example, JPY is quoted per 100 units.
 - When neither currency in a pair is TRY, the rate is calculated through TRY.
 - If the TCMB file cannot be reached, the last saved rates are kept and an admin notice is shown.
-- Without a valid serial, the module imports no rates. Existing rates stay untouched, and an "enter your serial" notice is shown.
+- Without a valid serial the module keeps importing for 30 days (grace period, see Licence check below). After that it imports no rates; existing rates stay untouched and the import shows a "license required" message.
 - Activity is logged to `var/log/magebooster_tcmb.log`.
 
 ## Requirements
@@ -121,7 +121,7 @@ You can import rates by hand, on a schedule, or both.
 
 ## Troubleshooting
 
-- **"TCMB rates: enter your serial number in Stores > Configuration > MageBooster > Licenses."**
+- **"TCMB rates need a MageBooster license. Enter your serial number in Stores > Configuration > MageBooster > Licenses."**
   - Enter a valid serial on the Licenses page.
   - Check that the serial covers every store view's domain.
 - **"TCMB rates could not be loaded (...). The last saved rates stay in use."** The TCMB file was unreachable or timed out.
@@ -144,6 +144,18 @@ You can import rates by hand, on a schedule, or both.
    ```
 
 Imported rates stay in Magento's `directory_currency_rate` table.
+
+## Licence check (serial number)
+
+- Enter the serial in **Stores > Configuration > MageBooster > Licenses**, field **Currency Rates (TCMB)** (Hyvä edition: **Currency Rates (TCMB) (Hyvä edition)**). The serial starts with `MB1`.
+- The **License status** table on that page shows each module as **Active**, **Grace period** or **Switched off**. `bin/magento magebooster:license:status` shows the same.
+- Without a valid serial (none entered, not valid, expired, another domain or another product) the module keeps working for **30 days**.
+  - The 30 days start the first time the store sees the module without a valid serial.
+  - A valid serial ends the grace period. If that serial later stops being valid (for example it expires), a new 30-day period starts.
+- During and after the grace period, every admin page shows a notice that cannot be closed. It names the module, the reason, and the days left or the date it was switched off, with links to the Licenses page and to your serial numbers at https://store.magebooster.com/licences/account/.
+- Shoppers never see a licence message, and the check runs inside your store: nothing is sent to MageBooster.
+- Development hosts (`localhost`, `127.0.0.1`, `*.localhost`, `*.test`, `*.local`) always pass the domain check.
+- **After the 30 days:** TCMB rates are no longer imported, neither by the scheduled update nor by **Import** in Stores > Currency Rates. The last saved rates stay in use.
 
 ## Licence & copying
 

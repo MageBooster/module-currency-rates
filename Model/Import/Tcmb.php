@@ -48,8 +48,8 @@ class Tcmb extends AbstractImport
 
     public function fetchRates()
     {
-        if (!$this->license->isValid(self::PRODUCT)) {
-            $this->_messages[] = __('TCMB rates: enter your serial number in Stores > Configuration > MageBooster > Licenses.');
+        if (!$this->isLicensed()) {
+            $this->_messages[] = __('TCMB rates need a MageBooster license. Enter your serial number in Stores > Configuration > MageBooster > Licenses.');
             return [];
         }
         $this->loadRates();
@@ -92,6 +92,18 @@ class Tcmb extends AbstractImport
             $this->_messages[] = __('TCMB rates could not be loaded (%1). The last saved rates stay in use.', $e->getMessage());
             $this->logger->error('TCMB import failed: ' . $e->getMessage());
             $this->flagManager->saveFlag(self::FLAG_ERROR, ['time' => gmdate('c'), 'error' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Valid serial or within the 30-day grace period (MageBooster_License).
+     */
+    private function isLicensed(): bool
+    {
+        try {
+            return $this->license->isActive(self::PRODUCT);
+        } catch (\Throwable $e) {
+            return false;
         }
     }
 }

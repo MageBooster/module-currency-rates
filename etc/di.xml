@@ -24,7 +24,13 @@
     <type name="MageBooster\License\Model\Products">
         <arguments>
             <argument name="products" xsi:type="array">
-                <item name="currency-rates" xsi:type="string">Currency Rates (TCMB)</item>
+                <item name="currency-rates" xsi:type="array">
+                    <item name="label" xsi:type="string">Currency Rates (TCMB)</item>
+                    <item name="codes" xsi:type="array">
+                        <item name="currency-rates" xsi:type="string">currency-rates</item>
+                        <item name="currency-rates-hyva" xsi:type="string">currency-rates-hyva</item>
+                    </item>
+                </item>
             </argument>
         </arguments>
     </type>

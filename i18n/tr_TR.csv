@@ -13,3 +13,8 @@
 "TCMB has no rate for %1.","TCMB'de %1 için kur yok."
 "TCMB rates could not be loaded (%1). The last saved rates stay in use.","TCMB kurları alınamadı (%1). Son kaydedilen kurlar kullanılmaya devam ediyor."
 "The last TCMB currency rate import failed (%1, %2). The previous rates are still in use.","Son TCMB kur aktarımı başarısız oldu (%1, %2). Önceki kurlar kullanılmaya devam ediyor."
+"TCMB rates need a MageBooster license. Enter your serial number in Stores > Configuration > MageBooster > Licenses.","TCMB kurları için MageBooster lisansı gerekir. Seri numaranızı Mağazalar > Yapılandırma > MageBooster > Lisanslar bölümüne girin."
+"Currency Rates (TCMB)","Currency Rates (TCMB)"
+"Currency Rates (TCMB) (Hyvä edition)","Currency Rates (TCMB) (Hyvä sürümü)"
+"Serial number, starts with MB1.","Seri numarası, MB1 ile başlar."
+"Only if you bought the Hyvä edition: serial number, starts with MB1.","Yalnızca Hyvä sürümünü aldıysanız: seri numarası, MB1 ile başlar."

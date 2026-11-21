@@ -30,7 +30,7 @@
         "magento/framework": "^103.0",
         "magento/module-directory": "^100.4",
         "magento/module-config": "^101.2",
-        "magebooster/module-license": "^1.0"
+        "magebooster/module-license": "^1.1"
     },
     "autoload": {
         "files": [
